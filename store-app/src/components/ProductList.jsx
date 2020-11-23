@@ -2,7 +2,7 @@ import React from 'react'
 
 class ProductList extends React.Component {
   render() {
-    const { products } = this.props
+    const { products, deleteProduct } = this.props
 
     return (
       products.map((product) => (
@@ -16,10 +16,10 @@ class ProductList extends React.Component {
             </img>
           </div>
           <div className="card-body">
-            <h5 className="card-title mt-3">{ product.title }</h5>
-            <div className="row justify-content-center">
-              <a href="#" className="btn btn-primary">Go somewhere</a>
-            </div>
+            <p className="card-title mt-3">{ product.title }</p>
+          </div>
+          <div className="row justify-content-center">
+            <button onClick={ () => deleteProduct(product.id) } className="btn btn-danger">Delete</button>
           </div>
         </div>
       ))
