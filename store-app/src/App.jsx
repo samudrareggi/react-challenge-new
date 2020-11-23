@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import ProductList from './components/ProductList.jsx'
 import Nav from './components/Nav.jsx'
 import Form from './components/Form.jsx'
@@ -17,13 +17,22 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .get('https://fakestoreapi.com/products')
-      .then(({ data }) => {
+    fetch('https://fakestoreapi.com/products')
+      .then(res => res.json())
+      .then(data => {
         this.setState({
           products: data
         })
       })
+
+
+    // axios
+    //   .get('https://fakestoreapi.com/products')
+    //   .then(({ data }) => {
+    //     this.setState({
+    //       products: data
+    //     })
+    //   })
   }
 
   willAddProd() {
