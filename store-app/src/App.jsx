@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import ProductList from './components/ProductList.jsx'
 import Nav from './components/Nav.jsx'
 import Form from './components/Form.jsx'
+import useFetch from './helpers/useFetcher'
 
 function App(props) {
-  const [products, setProducts] = useState([])
+  const [products, loading, setProducts] = useFetch('https://fakestoreapi.com/products')
   const [isLogin, setIsLogin] = useState(false)
   const [willAdd, setWillAdd] = useState(false)
   const [title, setTitle] = useState('')
@@ -54,16 +55,7 @@ function App(props) {
     setWillAdd(false)
   }
 
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
+  if (loading) return <h1>Please wait...</h1>
 
   if (!isLogin) {
     return (
