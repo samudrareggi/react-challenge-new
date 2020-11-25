@@ -1,13 +1,19 @@
 import React, {useState} from 'react'
 import ProductList from '../components/ProductList.jsx'
 import useFetch from '../helpers/useFetcher'
-import {  Switch, Route, Link } from 'react-router-dom'
+import {  useRouteMatch, Switch, Route, Link, useHistory } from 'react-router-dom'
 
 function Home(props) {
   const [products, loading, setProducts] = useFetch('https://fakestoreapi.com/products')
   const [willAdd, setWillAdd] = useState(false)
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
+  
+  const history = useHistory()
+
+  function onClick(id){
+    history.push(`/${id}`)
+  }
 
   const deleteHandler = (id) => {
     const updatedProduct = products.filter(product => (product.id !== id))
@@ -48,7 +54,7 @@ function Home(props) {
         <Switch>
           <Route exact path="/">
             <div className="row justify-content-around mt-3">
-              <ProductList products={ products } deleteProduct={ deleteHandler } />
+              <ProductList products={ products } deleteProduct={ deleteHandler } onClick={ onClick }/>
             </div>
           </Route>
         </Switch>

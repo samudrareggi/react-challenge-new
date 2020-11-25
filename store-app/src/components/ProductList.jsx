@@ -3,7 +3,7 @@ import React from 'react'
 function ProductList(props) {
   return (
     props.products.map((product) => (
-      <div className="card shadow p-3 mb-5 bg-white rounded" key={ product.id } style={{ width: "18rem" }}>
+      <div className="card shadow p-3 mb-5 bg-white rounded" key={ product.id } onClick={() => props.onClick(product.id)} style={{ width: "18rem" }}>
         <div className="row justify-content-center" style={{ height: "8rem" }}>
           <img
             src={product.image}

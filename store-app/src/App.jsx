@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Home, AddForm } from './pages'
+import { Home, AddForm, ProductDetail } from './pages'
 import Nav from './components/Nav.jsx'
 
 function App(props) {
@@ -35,6 +35,9 @@ function App(props) {
         </Route>
         <Route path="/addProduct">
           <AddForm></AddForm>
+        </Route>
+        <Route path={`/:id`}>
+          <ProductDetail/>
         </Route>
       </Switch>
     </>
