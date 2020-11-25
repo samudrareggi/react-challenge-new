@@ -1,6 +1,9 @@
 import React from 'react'
+import {useSelector} from 'react-redux'
 
 function ProductList(props) {
+  const state = useSelector((state) => state)
+  console.log(state)
   return (
     props.products.map((product) => (
       <div className="card shadow p-3 mb-5 bg-white rounded" key={ product.id } onClick={() => props.onClick(product.id)} style={{ width: "18rem" }}>

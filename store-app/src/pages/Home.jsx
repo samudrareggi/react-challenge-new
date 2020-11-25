@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import ProductList from '../components/ProductList.jsx'
 import useFetch from '../helpers/useFetcher'
-import {  useRouteMatch, Switch, Route, Link, useHistory } from 'react-router-dom'
+import { Switch, Route, Link, useHistory } from 'react-router-dom'
 
 function Home(props) {
   const [products, loading, setProducts] = useFetch('https://fakestoreapi.com/products')
   const [willAdd, setWillAdd] = useState(false)
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
-  
+
   const history = useHistory()
 
   function onClick(id){
