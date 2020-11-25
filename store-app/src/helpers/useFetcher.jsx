@@ -1,9 +1,9 @@
 import { useState, useEffect} from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 function useFetch(url) {
-  const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
+  const products = useSelector((state) => state.products)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -11,11 +11,12 @@ function useFetch(url) {
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        setData(data)
-        dispatch({
-          type: 'FETCH_PRODUCTS',
-          payload: data
-        })
+        if (products.length === 0) {
+          dispatch({
+            type: 'FETCH_PRODUCTS',
+            payload: data
+          })
+        }
       })
       .catch(err => {
         console.log(err)
@@ -23,9 +24,9 @@ function useFetch(url) {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [dispatch, products.length, url])
 
-  return [data, loading, setData]
+  return [loading]
 }
 
 export default useFetch

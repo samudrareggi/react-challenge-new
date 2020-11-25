@@ -6,7 +6,7 @@ function ProductDetail(props) {
   const { id } = useParams()
   const [product, loading] = useFetch(`https://fakestoreapi.com/products/${id}`)
 
-  if (loading) return <h3>Loading product....</h3>
+  if (loading) return <h3 className="text-center">Loading product....</h3>
 
   return (
     <div className="container">
@@ -17,7 +17,7 @@ function ProductDetail(props) {
               src={product.image}
               className="card-img-top mt-3"
               style={{ maxHeight: "18rem", maxWidth: "18rem" }}
-              alt="...">
+              alt="Product">
             </img>
           </div>
           <div className="card-body">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Home, AddForm, ProductDetail } from './pages'
+import { Home, AddForm, ProductDetail, Favorite } from './pages'
 import Nav from './components/Nav.jsx'
 
 function App(props) {
@@ -19,7 +19,7 @@ function App(props) {
     return (
       <React.Fragment>
         <Nav loginHandler={ loginHandler } isLogin={ isLogin } logoutHandler={ logoutHandler } />
-        <h1 className="text-center">Please login !</h1>
+        <h1 className="text-center mt-5">Please login !</h1>
       </React.Fragment>
     )
   }
@@ -36,6 +36,9 @@ function App(props) {
         </Route>
         <Route path="/addProduct">
           <AddForm></AddForm>
+        </Route>
+        <Route path="/favorites">
+          <Favorite></Favorite>
         </Route>
         <Route path={`/:id`}>
           <ProductDetail/>

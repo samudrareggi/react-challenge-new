@@ -1,49 +1,25 @@
-import React, {useState} from 'react'
+import React from 'react'
 import ProductList from '../components/ProductList.jsx'
 import useFetch from '../helpers/useFetcher'
 import { Switch, Route, Link, useHistory } from 'react-router-dom'
 
 function Home(props) {
-  const [products, loading, setProducts] = useFetch('https://fakestoreapi.com/products')
-  const [willAdd, setWillAdd] = useState(false)
-  const [title, setTitle] = useState('')
-  const [image, setImage] = useState('')
-
+  const [loading] = useFetch('https://fakestoreapi.com/products')
   const history = useHistory()
 
   function onClick(id){
     history.push(`/${id}`)
   }
 
-  const deleteHandler = (id) => {
-    const updatedProduct = products.filter(product => (product.id !== id))
-    setProducts(updatedProduct)
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center mt-5">
+        <div className="spinner-border" role="status">
+        </div>
+        <h4>Please wait...</h4>
+      </div>
+    )
   }
-
-  const titleHandler = (event) => {
-    setTitle(event.target.value)
-  }
-
-  const imageHandler = (event) => {
-    setImage(event.target.value)
-  }
-
-  const submitHandler = (event) => {
-    event.preventDefault()
-
-    const data = {
-      id: products.length + 1,
-      title: title,
-      image: image
-    }
-
-    setProducts([...products, data])
-    setImage('')
-    setTitle('')
-    setWillAdd(false)
-  }
-
-  if (loading) return <h1 className="text-center">Please wait...</h1>
 
   return (
     <div>
@@ -54,7 +30,7 @@ function Home(props) {
         <Switch>
           <Route exact path="/">
             <div className="row justify-content-around mt-3">
-              <ProductList products={ products } deleteProduct={ deleteHandler } onClick={ onClick }/>
+              <ProductList onClick={ onClick }/>
             </div>
           </Route>
         </Switch>
