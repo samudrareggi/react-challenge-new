@@ -1,38 +1,30 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import { Home, AddForm, ProductDetail, Favorite } from './pages'
-import Nav from './components/Nav.jsx'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { Home, AddForm, ProductDetail, Favorite, Login } from './pages'
 import { useSelector } from 'react-redux'
+import Nav from './components/Nav.jsx'
 
 function App(props) {
   const isLogin = useSelector((state) => state.isLogin)
-  if (!isLogin) {
-    return (
-      <React.Fragment>
-        <Nav/>
-        <h1 className="text-center mt-5">Please login !</h1>
-      </React.Fragment>
-    )
-  }
 
   return (
     <>
       <Nav/>
       <Switch>
         <Route exact path="/">
-          <Home />
+          {isLogin ? <Home/> : <Redirect to="/login" />}
         </Route>
         <Route path="/login">
-          <h1>Login</h1>
+          {isLogin ? <Redirect to="/"/> : <Login/>}
         </Route>
         <Route path="/addProduct">
-          <AddForm></AddForm>
+          {isLogin ? <AddForm/> : <Redirect to="/login" />}
         </Route>
         <Route path="/favorites">
-          <Favorite></Favorite>
+          {isLogin ? <Favorite/> : <Redirect to="/login" />}
         </Route>
         <Route path={`/:id`}>
-          <ProductDetail/>
+          {isLogin ? <ProductDetail/> : <Redirect to="/login" />}
         </Route>
       </Switch>
     </>

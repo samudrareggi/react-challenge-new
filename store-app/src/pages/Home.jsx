@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProductList from '../components/ProductList.jsx'
-import useFetch from '../helpers/useFetcher'
 import { Switch, Route, Link } from 'react-router-dom'
+import { FetchProducts } from '../store'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Home(props) {
-  const [products, loading] = useFetch('https://fakestoreapi.com/products')
+  const products = useSelector((state) => state.products)
+  const dispatch = useDispatch()
 
-  if (loading) {
-    return (
-      <div className="d-flex justify-content-center mt-5">
-        <div className="spinner-border" role="status">
-        </div>
-        <h4>Please wait...</h4>
-      </div>
-    )
-  }
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(FetchProducts('https://fakestoreapi.com/products'))
+    }
+  })
+
+
+  // if (loading) {
+  //   return (
+  //     <div className="d-flex justify-content-center mt-5">
+  //       <div className="spinner-border" role="status">
+  //       </div>
+  //       <h4>Please wait...</h4>
+  //     </div>
+  //   )
+  // }
+
+
 
   return (
     <div>

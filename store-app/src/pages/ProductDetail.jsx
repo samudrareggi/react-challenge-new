@@ -1,12 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import useFetch from '../helpers/useFetcher'
+import { useDispatch, useSelector } from 'react-redux'
+import { DetailProduct } from '../store'
 
 function ProductDetail(props) {
+  const product = useSelector((state) => state.product)
   const { id } = useParams()
-  const [product, loading] = useFetch(`https://fakestoreapi.com/products/${id}`)
+  const dispatch = useDispatch()
 
-  if (loading) return <h3 className="text-center">Loading product....</h3>
+  useEffect(() => {
+    dispatch(DetailProduct(`https://fakestoreapi.com/products/${id}`))
+    return () => {
+      console.log('Unmounted')
+    }
+  }, [dispatch, id])
+
+  // if (loading) {
+  //   return (
+  //     <div className="d-flex justify-content-center mt-5">
+  //       <div className="spinner-border" role="status">
+  //       </div>
+  //       <h4>Please wait...</h4>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="container">

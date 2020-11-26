@@ -32,18 +32,20 @@ function AddForm(props) {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 d-flex justify-content-center">
+      <div className="card p-5 shadow rounded text-center" style={{ width: "50%" }}>
       <form onSubmit={ (event) => submitHandler(event) }>
         <div className="form-group">
-          <label>Title</label>
+          <label>Title</label> <br/>
           <input type="text" className="form-control" value={ title } onChange={ titleHandler } />
         </div>
         <div className="form-group">
-          <label>Image</label>
+          <label>Image</label> <br/>
           <input type="url" className="form-control" value={ image } onChange={ imageHandler } />
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
+    </div>
     </div>
   )
 }

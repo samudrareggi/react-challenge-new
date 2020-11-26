@@ -6,13 +6,6 @@ function Nav(props) {
   const isLogin = useSelector((state) => state.isLogin)
   const dispatch = useDispatch()
 
-  const loginHandler = () => {
-    dispatch({
-      type: 'LOGIN_HANDLER',
-      payload: true
-    })
-  }
-
   const logoutHandler = () => {
     dispatch({
       type: 'LOGIN_HANDLER',
@@ -22,7 +15,7 @@ function Nav(props) {
 
   let button = null
   if (!isLogin) {
-    button = <button onClick={ () => loginHandler() } className="btn bg-primary">Login</button>
+    button = <Link to="/login" className="btn bg-primary">Login</Link>
   } else {
     button = [
       <Link to="/favorites" key="fav">
