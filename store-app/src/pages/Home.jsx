@@ -5,7 +5,8 @@ import { FetchProducts } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
 
 function Home(props) {
-  const products = useSelector((state) => state.products)
+  const products = useSelector((state) => state.productsReducer.products)
+  const loading = useSelector((state) => state.productsReducer.productsLoading)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -14,18 +15,15 @@ function Home(props) {
     }
   })
 
-
-  // if (loading) {
-  //   return (
-  //     <div className="d-flex justify-content-center mt-5">
-  //       <div className="spinner-border" role="status">
-  //       </div>
-  //       <h4>Please wait...</h4>
-  //     </div>
-  //   )
-  // }
-
-
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center mt-5">
+        <div className="spinner-border" role="status">
+        </div>
+        <h4>Please wait...</h4>
+      </div>
+    )
+  }
 
   return (
     <div>

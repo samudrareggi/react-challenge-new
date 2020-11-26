@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 function ProductList(props) {
   const [loading, setLoading] = useState(false)
-  const products = useSelector((state) => state.products)
+  const products = useSelector((state) => state.productsReducer.products)
+  const favorites = useSelector((state) => state.productsReducer.favorites)
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -13,14 +14,23 @@ function ProductList(props) {
   }
 
   const favoriteHandler = (data) => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-    dispatch({
-      type: 'ADD_FAVORITE',
-      payload: data
+    let unique = true
+    favorites.forEach(element => {
+      if (element.id === data.id) {
+        unique = false
+      }
     })
+
+    if (unique) {
+      setLoading(true)
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
+      dispatch({
+        type: 'ADD_FAVORITE',
+        payload: data
+      })
+    }
   }
 
   return (

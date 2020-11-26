@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 function AddForm(props) {
-  const products = useSelector((state) => state.products)
+  const products = useSelector((state) => state.productsReducer.products)
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
 
@@ -10,6 +10,7 @@ function AddForm(props) {
 
   const titleHandler = (event) => {
     setTitle(event.target.value)
+    console.log(title)
   }
 
   const imageHandler = (event) => {

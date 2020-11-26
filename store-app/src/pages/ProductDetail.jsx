@@ -4,26 +4,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import { DetailProduct } from '../store'
 
 function ProductDetail(props) {
-  const product = useSelector((state) => state.product)
+  const product = useSelector((state) => state.productsReducer.product)
+  const loading = useSelector((state) => state.productsReducer.detailLoading)
   const { id } = useParams()
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(DetailProduct(`https://fakestoreapi.com/products/${id}`))
     return () => {
-      console.log('Unmounted')
+      dispatch({
+        type: 'SET_DETAIL_LOADING',
+        payload: true
+      })
     }
   }, [dispatch, id])
 
-  // if (loading) {
-  //   return (
-  //     <div className="d-flex justify-content-center mt-5">
-  //       <div className="spinner-border" role="status">
-  //       </div>
-  //       <h4>Please wait...</h4>
-  //     </div>
-  //   )
-  // }
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center mt-5">
+        <div className="spinner-border" role="status">
+        </div>
+        <h4>Please wait...</h4>
+      </div>
+    )
+  }
 
   return (
     <div className="container">

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import Nav from './components/Nav.jsx'
 
 function App(props) {
-  const isLogin = useSelector((state) => state.isLogin)
+  const isLogin = useSelector((state) => state.loginReducer.isLogin)
 
   return (
     <>

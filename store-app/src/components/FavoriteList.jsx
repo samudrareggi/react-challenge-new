@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 function FavoriteList(props) {
-  const favorites = useSelector((state) => state.favorites)
+  const favorites = useSelector((state) => state.productsReducer.favorites)
   const dispatch = useDispatch()
 
   const deleteHandler = (id) => {
