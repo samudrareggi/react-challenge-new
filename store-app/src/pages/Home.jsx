@@ -1,15 +1,10 @@
 import React from 'react'
 import ProductList from '../components/ProductList.jsx'
 import useFetch from '../helpers/useFetcher'
-import { Switch, Route, Link, useHistory } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 
 function Home(props) {
-  const [loading] = useFetch('https://fakestoreapi.com/products')
-  const history = useHistory()
-
-  function onClick(id){
-    history.push(`/${id}`)
-  }
+  const [products, loading] = useFetch('https://fakestoreapi.com/products')
 
   if (loading) {
     return (
@@ -30,7 +25,7 @@ function Home(props) {
         <Switch>
           <Route exact path="/">
             <div className="row justify-content-around mt-3">
-              <ProductList onClick={ onClick }/>
+              <ProductList/>
             </div>
           </Route>
         </Switch>

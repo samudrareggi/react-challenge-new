@@ -1,16 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 function Nav(props) {
+  const isLogin = useSelector((state) => state.isLogin)
+  const dispatch = useDispatch()
+
+  const loginHandler = () => {
+    dispatch({
+      type: 'LOGIN_HANDLER',
+      payload: true
+    })
+  }
+
+  const logoutHandler = () => {
+    dispatch({
+      type: 'LOGIN_HANDLER',
+      payload: false
+    })
+  }
+
   let button = null
-  if (!props.isLogin) {
-    button = <button onClick={ () => props.loginHandler() } className="btn bg-primary">Login</button>
+  if (!isLogin) {
+    button = <button onClick={ () => loginHandler() } className="btn bg-primary">Login</button>
   } else {
     button = [
       <Link to="/favorites" key="fav">
         <span><i className="fa fa-heart text-danger"style={{ cursor: "pointer", fontSize: "2em"}} ></i></span>
       </Link>,
-      <button onClick={ () => props.logoutHandler() } className="btn bg-danger" key="log">Logout</button>
+      <button onClick={ () => logoutHandler() } className="btn bg-danger" key="log">Logout</button>
     ]
   }
 

@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 function useFetch(url) {
+  const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const products = useSelector((state) => state.products)
   const dispatch = useDispatch()
@@ -11,6 +12,7 @@ function useFetch(url) {
     fetch(url)
       .then(res => res.json())
       .then(data => {
+        setData(data)
         if (products.length === 0) {
           dispatch({
             type: 'FETCH_PRODUCTS',
@@ -26,7 +28,7 @@ function useFetch(url) {
       })
   }, [dispatch, products.length, url])
 
-  return [loading]
+  return [data, loading]
 }
 
 export default useFetch

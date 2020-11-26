@@ -1,8 +1,16 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 function FavoriteList(props) {
   const favorites = useSelector((state) => state.favorites)
+  const dispatch = useDispatch()
+
+  const deleteHandler = (id) => {
+    dispatch({
+      type: 'DELETE_FAVORITE',
+      payload: id
+    })
+  }
 
   return (
     favorites.map((favorite) => (
@@ -18,7 +26,7 @@ function FavoriteList(props) {
         <div className="card-body">
           <p className="card-title mt-3">{ favorite.title }</p>
         </div>
-          <button onClick={ () => props.deleteHandler( favorite.id) } className="btn btn-danger">Delete</button>
+          <button onClick={ () => deleteHandler(favorite.id) } className="btn btn-danger">Delete</button>
       </div>
     ))
   )

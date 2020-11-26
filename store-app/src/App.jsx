@@ -1,24 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Home, AddForm, ProductDetail, Favorite } from './pages'
 import Nav from './components/Nav.jsx'
+import { useSelector } from 'react-redux'
 
 function App(props) {
-
-  const [isLogin, setIsLogin] = useState(false)
-
-  const loginHandler = () => {
-    setIsLogin(true)
-  }
-
-  const logoutHandler = () => {
-    setIsLogin(false)
-  }
-
+  const isLogin = useSelector((state) => state.isLogin)
   if (!isLogin) {
     return (
       <React.Fragment>
-        <Nav loginHandler={ loginHandler } isLogin={ isLogin } logoutHandler={ logoutHandler } />
+        <Nav/>
         <h1 className="text-center mt-5">Please login !</h1>
       </React.Fragment>
     )
@@ -26,7 +17,7 @@ function App(props) {
 
   return (
     <>
-      <Nav loginHandler={ loginHandler } isLogin={ isLogin } logoutHandler={ logoutHandler } />
+      <Nav/>
       <Switch>
         <Route exact path="/">
           <Home />

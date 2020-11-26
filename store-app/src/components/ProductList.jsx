@@ -1,10 +1,16 @@
 import React, {useState} from 'react'
+import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 function ProductList(props) {
   const [loading, setLoading] = useState(false)
   const products = useSelector((state) => state.products)
   const dispatch = useDispatch()
+  const history = useHistory()
+
+  function onClick(id){
+    history.push(`/${id}`)
+  }
 
   const favoriteHandler = (data) => {
     setLoading(true)
@@ -26,7 +32,7 @@ function ProductList(props) {
             className="card-img-top mt-3"
             style={{ maxHeight: "8rem", maxWidth: "8rem", cursor: "pointer" }}
             alt="..."
-            onClick={() => props.onClick(product.id)}>
+            onClick={() => onClick(product.id)}>
           </img>
         </div>
         <div className="card-body">
