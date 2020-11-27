@@ -1,8 +1,12 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import store from './store'
+import { Home } from './pages'
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('Testing Home Component', () => {
+  test('should render spinner loading correctly when loading', () => {
+    const { getByTestId } = render(<Provider store={store}><Home /></Provider>)
+    const loading = getByTestId('spinner')
+    expect(loading).toBeInTheDocument()
+  })
+})

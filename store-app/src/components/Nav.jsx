@@ -41,7 +41,7 @@ function Nav(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <Link to="/" className="navbar-brand col-1">Cartally</Link>
+        <Link data-testid="brand-link" to="/" className="navbar-brand col-1">Cartally</Link>
         {button}
       </div>
     </nav>

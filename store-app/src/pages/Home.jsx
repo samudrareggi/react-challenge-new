@@ -18,7 +18,7 @@ function Home(props) {
   if (loading) {
     return (
       <div className="d-flex justify-content-center mt-5">
-        <div className="spinner-border" role="status">
+        <div data-testid="spinner" className="spinner-border" role="status">
         </div>
         <h4>Please wait...</h4>
       </div>
