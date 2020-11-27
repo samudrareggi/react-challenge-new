@@ -17,7 +17,7 @@ function Login(props) {
   return(
     <div className="login">
     <div className="wrapper fadeInDown">
-      <div id="formContent">
+      <div data-testid="login-content" id="formContent">
         <div className="fadeIn first">
           <h1><i className="fa fa-user"></i></h1>
           <h3>Login</h3>

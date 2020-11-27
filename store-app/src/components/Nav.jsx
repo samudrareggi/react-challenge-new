@@ -27,7 +27,7 @@ function Nav(props) {
 
   let button = null
   if (!isLogin) {
-    button = <Link to="/login" className="btn bg-primary">Login</Link>
+    button = <Link to="/login" data-testid="login-link" className="btn bg-primary">Login</Link>
   } else {
     button = [
       <input onChange={searchDebounce} key="search" className="form-control mr-sm-2 col" type="search" placeholder="Search" style={{ width: "300px" }}></input>,
