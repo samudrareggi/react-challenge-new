@@ -32,9 +32,9 @@ function ProductList(props) {
       })
     }
   }
-
+console.log(products);
   return (
-    products.map((product) => (
+    products ? products.map((product, idx) => (
       <div data-testid="products-item" className="card shadow p-3 mb-5 bg-white rounded" key={ product.id } style={{ width: "18rem" }}>
         <div className="row justify-content-center" style={{ height: "8rem" }}>
           <img
@@ -42,7 +42,7 @@ function ProductList(props) {
             className="card-img-top mt-3"
             style={{ maxHeight: "8rem", maxWidth: "8rem", cursor: "pointer" }}
             alt="..."
-            onClick={() => onClick(product.id)}>
+            onClick={() => onClick(idx)}>
           </img>
         </div>
         <div className="card-body">
@@ -60,7 +60,7 @@ function ProductList(props) {
           }
         </div>
       </div>
-    ))
+    )) : null
   )
 }
 

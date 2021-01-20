@@ -83,6 +83,10 @@ function productsReducer(state = productsState, action) {
     case 'FETCH_PRODUCTS':
       return {...state, products: action.payload}
 
+    case 'ADD_PRODUCTS':
+      const newProduct = state.products.concat(action.payload)
+      return {...state, products: newProduct}
+
     case 'SEARCH_PRODUCTS':
       const query = state.products.filter(product => (product.title.toLowerCase().includes(action.payload.toLowerCase())))
       return {...state, products: query}
